@@ -22,18 +22,31 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 ```
 
 ## Generación de Docker
+
+Tenga certeza que el .jar ha sido generado correctamente con el comando:
+```
+mvn clean package
+```
+
 ```properties
 FROM openjdk:21-jdk-slim
 LABEL authors="Daniel Mercado Tapias"
 
 WORKDIR /app
 
-COPY target/fiduciariabogotaback-0.0.1-SNAPSHOT.jar /app/fiduciariabogotaback.jar
+COPY target/fiduciariabogotaback-1.0.0.jar /app/fiduciariabogotaback-1.0.0.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","fiduciariabogotaback.jar"]
+ENTRYPOINT ["java","-jar","fiduciariabogotaback-1.0.0.jar"]
 ```
+
+Una vez generada la imagen construya el contenedor.
+
+```
+dock build -t fiduciariabgotaimg .
+```
+
 
 ### Pruebas
 
