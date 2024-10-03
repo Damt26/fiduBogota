@@ -10,6 +10,8 @@ import java.math.BigDecimal;
  * DTO for {@link com.danielmercadotapias.fiduciariabogotaback.persistence.model.Transaction}
  */
 public record TransactionInput(
-        @NotNull @Positive BigDecimal amount
+        @NotNull(message ="No puede ser nulo")
+        @Positive(message = "Debe ser positivo")
+        BigDecimal amount
 ) implements Serializable {
 }
