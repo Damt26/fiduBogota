@@ -44,7 +44,7 @@ ENTRYPOINT ["java","-jar","fiduciariabogotaback-1.0.0.jar"]
 Una vez generada la imagen construya el contenedor.
 
 ```
-dock build -t fiduciariabgotaimg .
+docker build -t fiduciariabgotaimg:1 .
 ```
 
 

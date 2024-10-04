@@ -1,0 +1,46 @@
+services:
+  db:
+    image: "postgres:16.2"
+    container_name: "pg16"
+    environment:
+      POSTGRES_DB: techtest
+      POSTGRES_USER: daniel
+      POSTGRES_PASSWORD: damt
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "54320:5432"
+    networks:
+      - fbg_net
+
+  backend:
+    image: fiduciariabgotaimg:latest
+    container_name: "backend"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/techtest
+      SPRING_DATASOURCE_PASSWORD: damt
+      SPRING_DATASOURCE_USERNAME: daniel
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - fbg_net
+
+  front:
+    image: fidubogotafront:latest
+    container_name: "react"
+    ports:
+      - "3000:80"
+    networks:
+      - fbg_net
+    depends_on:
+      - backend
+
+networks:
+  fbg_net:
+    driver: bridge
+
+volumes:
+  db_data:
