@@ -9,12 +9,12 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - "54320:5432"
+      - "54321:5432"
     networks:
       - fbg_net
 
   backend:
-    image: fiduciariabgotaimg:latest
+    image: fiduciariabgotabackimg:latest
     container_name: "backend"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/techtest
@@ -29,8 +29,8 @@ services:
       - fbg_net
 
   front:
-    image: fidubogotafront:latest
-    container_name: "react"
+    image: fiduciariabgotafrontimg:latest
+    container_name: "front"
     ports:
       - "3000:80"
     networks:
